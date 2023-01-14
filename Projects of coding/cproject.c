@@ -1,9 +1,58 @@
 //Printing the pizza menu and sending the bill amount to the given mobile number
 #include<stdio.h>
+#include<string.h>
 void menu();
 int preference(int);
 double coupons();
 int main(){
+    FILE *fp;
+    char s[80],x[80],z[80];
+    int count=0,count1 =0,count2=0;
+    char emailid[30],actualname[20], pass[20] ,emailid1[30],pass1[20];
+    printf("For login press 1 and for signup press 2: ");
+    int choose;
+    scanf("%d",&choose);
+    if(choose==1){
+    printf("Enter your Email ID: ");
+    scanf("%s",emailid);
+    printf("Enter your password: ");
+    scanf("%s",pass);
+    printf("Login in successful!!");
+    }else if(choose==2){
+    fp=fopen("id.txt","w");
+    if(fp==NULL){
+        puts("Cannot open file");
+    }
+    printf("Enter your full name: ");
+    while(strlen(gets(s))>0){
+        
+        fputs("name-",fp);
+        fputs(s,fp);
+        fputs("\t\t\t\t",fp);
+        count++;
+    }
+    printf("Enter your email id you want to set: ");
+    while(strlen(gets(x))>0){
+        
+        fputs("id-",fp);
+        fputs(x,fp);
+        fputs("\t\t\t\t",fp);
+        count1++;}
+     printf("Enter your password you want to use: ");
+    while(strlen(gets(z))>0){
+        
+        fputs("password-",fp);
+        fputs(z,fp);
+        fputs("\t",fp);
+        count2++;}
+
+    fclose(fp);
+
+        printf("Sign Up successful!!");
+
+    }else{
+        printf("You have entered wrong choice!!");
+    }
     int choice;
     
     menu();
@@ -17,9 +66,20 @@ int main(){
     }else{
        break;
     }}
-      total = total - total*(coupons()/100);
+    printf("Press 1 to add to cart else press 0 to proceed to payment: ");
+    int cart;
+    scanf("%d",&cart);
+    if(cart==1){
+        printf("Added to cart!!");
+        return 0;
+    }else{
+    total = total - total*(coupons()/100);
     printf("your total is %lf\n",total);
+
     return 0 ;
+
+    }
+
 }
 //This function prints the menu 
 void menu(){
@@ -160,7 +220,7 @@ int preference(int bill ){
                     default: printf("Enter valid size\n");
                 }
                 break;
-         default: printf("Enter valid ");
+         default: printf("\nEnter valid size!!");
         
     }
     return bill;
@@ -188,6 +248,6 @@ double coupons(){
                 return 15;
                 break;
                 
-        default: printf("You have entered wrong coupon serial number");
+        default: printf("\nYou have entered wrong coupon serial number!!");
     }
 }
